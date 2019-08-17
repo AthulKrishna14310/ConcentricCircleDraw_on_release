@@ -103,6 +103,7 @@ public class MainActivity extends AppCompatActivity {
                             CFAlertDialog.CFAlertActionAlignment.END, new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
+                                startActivity(new Intent(MainActivity.this,TryUrSelfActivity.class));
                                 }
                             });
 
