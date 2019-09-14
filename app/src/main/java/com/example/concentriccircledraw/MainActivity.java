@@ -97,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
 
             CFAlertDialog.Builder builder = new CFAlertDialog.Builder(this)
                     .setDialogStyle(CFAlertDialog.CFAlertStyle.BOTTOM_SHEET)
-                    .setTitle("Success. Congrats you hit the score")
+                    .setTitle("Well done. You can proceed now to try concentric circles  yourself.")
                     .setIcon(R.drawable.ic_check_circle_black_24dp)
                     .addButton("Try your self", -1, -1, CFAlertDialog.CFAlertActionStyle.POSITIVE,
                             CFAlertDialog.CFAlertActionAlignment.END, new DialogInterface.OnClickListener() {

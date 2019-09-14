@@ -25,22 +25,25 @@
         android:background="@color/colorPrimaryDark"
         android:text="DRAW THE FIRST CIRCLE ,THEN CLICK HERE"
         android:textColor="#FFFF"
-        android:textSize="20sp" />
+        android:textSize="30sp" />
 
     <android.support.v7.widget.CardView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
-        app:cardCornerRadius="50dp"
+        app:cardCornerRadius="30dp"
+        android:layout_margin="8dp"
         app:cardElevation="10dp"
-        android:layout_alignParentLeft="true"
-        android:layout_centerVertical="true">
+        android:layout_alignParentRight="true"
+        android:layout_alignBottom="@+id/finishButton"
+
+       >
         <Button
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:id="@+id/refreshButton"
             android:foreground="@drawable/ic_refresh_black_24dp"
-            android:background="@color/colorPrimaryDark"
+            android:background="@color/colorAccent"
             />
     </android.support.v7.widget.CardView>
     <Chronometer

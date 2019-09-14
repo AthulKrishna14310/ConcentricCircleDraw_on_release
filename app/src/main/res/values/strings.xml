@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">ConcentricCircleDraw</string>
+    <string name="title_activity_fullscreen">Concentric Circle Draw</string>
+    <string name="dummy_button">START</string>
+    <string name="dummy_content">CONCENTRIC CIRCLE DRAW ACTIVITY</string>
+
 </resources>
