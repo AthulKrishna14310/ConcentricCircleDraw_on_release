@@ -94,7 +94,7 @@ public class TryUrSelfActivity extends AppCompatActivity {
 
                 } else if (event.getAction() == MotionEvent.ACTION_MOVE) {
                     finishButton.setText("CONTINUE DRAWING " + texts.get(circleCount) + " CIRCLE");
-                    finishButton.setBackgroundColor(Color.parseColor("#00574B"));
+                    finishButton.setBackgroundColor(Color.parseColor("#008577"));
                     pixelXs.add(circleDrawLayout.getXX());
                     pixelYs.add(circleDrawLayout.getYY());
 

@@ -36,11 +36,28 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                long time= SystemClock.elapsedRealtime()-chronometer.getBase();
-                float x=paintView.getTouched()/(time/1000);
-                int marks=(int)x;
-                finishButton.setText("Score:"+marks);
-                showfinalDialogue(marks,paintView);
+                if(paintView.greenEnded&&paintView.blueEnded&&paintView.magentaEnded&&paintView.yellowEnded) {
+                    long time = SystemClock.elapsedRealtime() - chronometer.getBase();
+                    float x = paintView.getTouched() / (time / 1000);
+                    int marks = (int) x;
+                    showfinalDialogue(marks, paintView);
+                }else {
+                    CFAlertDialog.Builder builder = new CFAlertDialog.Builder(MainActivity.this)
+                            .setDialogStyle(CFAlertDialog.CFAlertStyle.BOTTOM_SHEET)
+                            .setTitle(("Circles are incomplete, please start and end each circle " +
+                                    "on its respective coloured dots."))
+                            .setIcon(R.drawable.ic_cancel_black_24dp)
+                            .addButton("Redo", -1, -1, CFAlertDialog.CFAlertActionStyle.NEGATIVE,
+                                    CFAlertDialog.CFAlertActionAlignment.END, new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            recreate();
+                                        }
+                                    });
+
+                    builder.show();
+
+                }
                  }
         });
 
@@ -97,7 +114,11 @@ public class MainActivity extends AppCompatActivity {
 
             CFAlertDialog.Builder builder = new CFAlertDialog.Builder(this)
                     .setDialogStyle(CFAlertDialog.CFAlertStyle.BOTTOM_SHEET)
-                    .setTitle("Well done. You can proceed now to try concentric circles  yourself.")
+                    .setTitle("Well done .You are able to get trace curves, now you  can proceed " +
+                            "to" +
+                            " try " +
+                            "concentric circles  " +
+                            "yourself.")
                     .setIcon(R.drawable.ic_check_circle_black_24dp)
                     .addButton("Try your self", -1, -1, CFAlertDialog.CFAlertActionStyle.POSITIVE,
                             CFAlertDialog.CFAlertActionAlignment.END, new DialogInterface.OnClickListener() {

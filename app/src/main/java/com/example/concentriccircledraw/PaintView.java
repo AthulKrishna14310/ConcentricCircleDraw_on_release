@@ -22,6 +22,17 @@ public class PaintView extends android.support.v7.widget.AppCompatImageView {
     private Bitmap bitmap;
     private int touched=0;
     private int total=0;
+
+    public boolean blueStarted=false;
+    public boolean greenStarted=false;
+    public boolean yellowStarted=false;
+    public boolean magentaStarted=false;
+
+    public boolean blueEnded=false;
+    public boolean greenEnded=false;
+    public boolean yellowEnded=false;
+    public boolean magentaEnded=false;
+
     private boolean outIndex=false;
     private ArrayList<Integer> pixels=new ArrayList<>();
     private int totalCoordinates=0;
@@ -114,10 +125,33 @@ public class PaintView extends android.support.v7.widget.AppCompatImageView {
 
                     total++;
 
+
                     if(r==0&&g==0&&b==0){
                         outIndex=false;
                         touched++;
 
+                    }
+                    if(r==0&&g==255&&b==0){
+                        if(!greenStarted&&!greenEnded)greenStarted=true;
+
+                        if(greenStarted&&!greenEnded)greenEnded=true;
+                    }
+                    if(r==0&&g==0&&b==255){
+                        if(!blueStarted&&!blueEnded)blueStarted=true;
+
+                        if(blueStarted&&!blueEnded)blueEnded=true;
+                    }
+
+                    if(r==255&&g==255&&b==0){
+                        if(!yellowStarted&&!yellowEnded)yellowStarted=true;
+
+                        if(yellowStarted&&!yellowEnded)yellowEnded=true;
+                    }
+
+                    if(r==255&&g==0&&b==255){
+                        if(!magentaStarted&&!magentaEnded)magentaStarted=true;
+
+                        if(magentaStarted&&!magentaEnded)magentaEnded=true;
                     }
 
                     else if(r==255&&g==255&&b==255){

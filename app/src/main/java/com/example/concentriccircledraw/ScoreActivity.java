@@ -31,7 +31,7 @@ public class ScoreActivity extends AppCompatActivity {
 
         scoreButton.setText(" "+temp+"/ "+"100");
 
-        if(temp<50){
+        if(temp<75){
             showfinalDialogue(false);
         }else {
             showfinalDialogue(true);
