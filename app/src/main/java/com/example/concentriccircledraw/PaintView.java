@@ -18,7 +18,7 @@ public class PaintView extends android.support.v7.widget.AppCompatImageView {
     public ViewGroup.LayoutParams params;
     private Path path=new Path();
     private Paint brush=new Paint();
-    private int SCORE=28;
+    private int SCORE=30;
     private Bitmap bitmap;
     private int touched=0;
     private int total=0;
@@ -60,7 +60,7 @@ public class PaintView extends android.support.v7.widget.AppCompatImageView {
         brush.setColor(Color.MAGENTA);
         brush.setStyle(Paint.Style.STROKE);
         brush.setStrokeJoin(Paint.Join.ROUND);
-        brush.setStrokeWidth(6f);
+        brush.setStrokeWidth(12f);
 
         this.setDrawingCacheEnabled(true);
         this.buildDrawingCache(true);
@@ -77,7 +77,7 @@ public class PaintView extends android.support.v7.widget.AppCompatImageView {
         brush.setColor(Color.MAGENTA);
         brush.setStyle(Paint.Style.STROKE);
         brush.setStrokeJoin(Paint.Join.ROUND);
-        brush.setStrokeWidth(6f);
+        brush.setStrokeWidth(12f);
 
         this.setBackground(context.getDrawable(R.drawable.circle));
         this.setDrawingCacheEnabled(true);
@@ -91,7 +91,7 @@ public class PaintView extends android.support.v7.widget.AppCompatImageView {
         brush.setColor(Color.MAGENTA);
         brush.setStyle(Paint.Style.STROKE);
         brush.setStrokeJoin(Paint.Join.ROUND);
-        brush.setStrokeWidth(6f);
+        brush.setStrokeWidth(12f);
 
         this.setBackground(context.getDrawable(R.drawable.circle));
         this.setDrawingCacheEnabled(true);

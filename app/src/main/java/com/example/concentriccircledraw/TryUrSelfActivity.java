@@ -27,16 +27,16 @@ public class TryUrSelfActivity extends AppCompatActivity {
 
     private int circleCount = 0;
 
-    private int CENTRE_X = 297;
-    private int CENTRE_Y = 308;
-    private int CIRCLE_ONE_X = 297;
-    private int CIRCLE_ONE_Y = 230;
-    private int CIRCLE_TWO_X = 297;
-    private int CIRCLE_TWO_Y = 169;
-    private int CIRCLE_THREE_X = 297;
-    private int CIRCLE_THREE_Y = 105;
-    private int CIRCLE_FOUR_X = 297;
-    private int CIRCLE_FOUR_Y = 32;
+    private int CENTRE_X = 452;
+    private int CENTRE_Y = 452;
+    private int CIRCLE_ONE_X = 445;
+    private int CIRCLE_ONE_Y = 355;
+    private int CIRCLE_TWO_X = 455;
+    private int CIRCLE_TWO_Y = 265;
+    private int CIRCLE_THREE_X = 455;
+    private int CIRCLE_THREE_Y = 155;
+    private int CIRCLE_FOUR_X = 455;
+    private int CIRCLE_FOUR_Y = 45;
 
 
     private CircleDrawLayout circleDrawLayout;
@@ -93,7 +93,8 @@ public class TryUrSelfActivity extends AppCompatActivity {
                     finishButton.setBackgroundColor(Color.parseColor("#00574B"));
 
                 } else if (event.getAction() == MotionEvent.ACTION_MOVE) {
-                    finishButton.setText("CONTINUE DRAWING " + texts.get(circleCount) + " CIRCLE");
+                    finishButton.setText("CONTINUE DRAWING " + texts.get(circleCount) + " CIRCLE " +
+                            "-"+circleDrawLayout.getXX()+","+circleDrawLayout.getYY());
                     finishButton.setBackgroundColor(Color.parseColor("#008577"));
                     pixelXs.add(circleDrawLayout.getXX());
                     pixelYs.add(circleDrawLayout.getYY());

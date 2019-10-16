@@ -10,12 +10,12 @@
 
     <com.example.concentriccircledraw.CircleDrawLayout
         android:id="@+id/circleDrawLayout"
-        android:layout_width="400dp"
-        android:layout_height="400dp"
+        android:layout_width="600dp"
+        android:layout_height="600dp"
         android:layout_alignParentBottom="true"
         android:layout_centerInParent="false"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="10dp" />
+        android:layout_marginBottom="30dp" />
 
     <Button
         android:id="@+id/finishButtontry"

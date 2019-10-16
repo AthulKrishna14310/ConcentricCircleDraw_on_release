@@ -118,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
                             "to" +
                             " try " +
                             "concentric circles  " +
-                            "yourself.")
+                            "yourself . Score :: " +marks)
                     .setIcon(R.drawable.ic_check_circle_black_24dp)
                     .addButton("Try your self", -1, -1, CFAlertDialog.CFAlertActionStyle.POSITIVE,
                             CFAlertDialog.CFAlertActionAlignment.END, new DialogInterface.OnClickListener() {
