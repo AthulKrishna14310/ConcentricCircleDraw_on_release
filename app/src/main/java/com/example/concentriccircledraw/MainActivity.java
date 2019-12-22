@@ -109,6 +109,7 @@ public class MainActivity extends AppCompatActivity {
                 } else if (event.getAction() == MotionEvent.ACTION_UP) {
                     ErrorMediaPlayer.pause();
                     finishButton.setText("CLICK HERE IF FINISHED");
+                    finishButton.setBackgroundColor(Color.parseColor("#00e676"));
                     base = chronometer.getBase();
                     chronometer.setBase(base);
                     chronometer.stop();
