@@ -3,6 +3,7 @@ package com.example.concentriccircledraw;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.media.MediaPlayer;
 import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -50,6 +51,7 @@ public class TryUrSelfActivity extends AppCompatActivity {
     private int temp = 0;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,6 +80,7 @@ public class TryUrSelfActivity extends AppCompatActivity {
         chronometer = (Chronometer) findViewById(R.id.chronometer);
 
 
+
     }
 
     @Override
@@ -101,7 +104,7 @@ public class TryUrSelfActivity extends AppCompatActivity {
 
                 } else if (event.getAction() == MotionEvent.ACTION_UP) {
                     finishButton.setText("CLICK HERE IF " + texts.get(circleCount) + " IS FINISHED");
-                    finishButton.setBackgroundColor(Color.parseColor("#D81B60"));
+                    finishButton.setBackgroundColor(Color.parseColor("#00e676"));
                     base = chronometer.getBase();
                     chronometer.setBase(base);
                     chronometer.stop();
@@ -343,5 +346,7 @@ public class TryUrSelfActivity extends AppCompatActivity {
 
         }
     }
+
+
 }
 

@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
     private long base;
     private boolean start = true;
     private MediaPlayer ErrorMediaPlayer;
+    private Button TryYourselfBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
         paintView = (PaintView) findViewById(R.id.paintView);
         refreshButton = (Button) findViewById(R.id.refreshButton);
         chronometer = (Chronometer) findViewById(R.id.chronometer);
+        TryYourselfBtn = findViewById(R.id.main_try_yourself_btn);
 
         finishButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,6 +70,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        TryYourselfBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                startActivity(new Intent(MainActivity.this, TryUrSelfActivity.class));
+
+
+            }
+        });
 
         refreshButton.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -57,5 +57,20 @@
         android:id="@+id/chronometer"
         android:layout_marginRight="10dp"/>
 
+    <Button
+        android:id="@+id/main_try_yourself_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:backgroundTint="@color/colorLightGreen"
+        android:text="Try Yourself"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:padding="5dp"
+        android:textColor="#ffffff"
+        android:layout_margin="10dp"        />
+
+
 
 </RelativeLayout>
