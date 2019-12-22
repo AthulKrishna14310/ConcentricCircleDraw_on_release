@@ -113,6 +113,16 @@ public class TryUrSelfActivity extends AppCompatActivity {
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
 
+                    /*
+                    if(Speaker !=null)
+                    {
+                        if(Speaker.isSpeaking())
+                        {
+                            Speaker.stop();
+                        }
+                    }
+                     */
+
                     finishButton.setText("CONTINUE DRAWING " + texts.get(circleCount) + " CIRCLE");
                     finishButton.setBackgroundColor(Color.parseColor("#00574B"));
 
@@ -162,7 +172,9 @@ public class TryUrSelfActivity extends AppCompatActivity {
                         circleCount++;
                         break;
                     case 3:
-                        finishButton.setText("CLICK AGAIN TO GET THE SCORE");
+                        String text = "CLICK AGAIN TO GET THE SCORE";
+                        Speaker.speak(text,TextToSpeech.QUEUE_FLUSH,null);
+                        finishButton.setText(text);
                         finishButton.setBackgroundColor(Color.parseColor("#00574B"));
                         revealSCORE_FOUR();
                         circleCount++;
