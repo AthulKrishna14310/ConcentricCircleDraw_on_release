@@ -41,9 +41,11 @@
             android:id="@+id/refreshButton"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:background="@color/colorAccent"
+            android:background="@color/colorLightBlue"
             android:foreground="@drawable/ic_refresh_black_24dp" />
+
      </android.support.v7.widget.CardView>
+
     <Chronometer
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
