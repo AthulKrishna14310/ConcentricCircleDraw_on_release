@@ -132,7 +132,7 @@ public class MainActivity extends AppCompatActivity {
         }else{
             CFAlertDialog.Builder builder = new CFAlertDialog.Builder(this)
                     .setDialogStyle(CFAlertDialog.CFAlertStyle.BOTTOM_SHEET)
-                    .setTitle("Failed. Score not satisfactory, please try again.")
+                    .setTitle("Failed. Please draw the circles with minimum time and less traced out.")
                     .setIcon(R.drawable.ic_cancel_black_24dp)
                     .addButton("Redo", -1, -1, CFAlertDialog.CFAlertActionStyle.NEGATIVE,
                             CFAlertDialog.CFAlertActionAlignment.END, new DialogInterface.OnClickListener() {
