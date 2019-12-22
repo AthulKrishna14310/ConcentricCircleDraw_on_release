@@ -5,16 +5,21 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.os.SystemClock;
+import android.speech.tts.TextToSpeech;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Chronometer;
+import android.widget.RelativeLayout;
+import android.widget.Space;
 
 import com.crowdfire.cfalertdialog.CFAlertDialog;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class TryUrSelfActivity extends AppCompatActivity {
     private ArrayList<Integer> radiuses1;
@@ -50,7 +55,8 @@ public class TryUrSelfActivity extends AppCompatActivity {
     private ArrayList<Integer> scores;
     private int temp = 0;
 
-
+    private TextToSpeech Speaker;
+    private RelativeLayout RootTryYourself;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,7 +85,22 @@ public class TryUrSelfActivity extends AppCompatActivity {
         finishButton = (Button) findViewById(R.id.finishButtontry);
         chronometer = (Chronometer) findViewById(R.id.chronometer);
 
+        RootTryYourself = findViewById(R.id.root_try_yourself);
+        Speaker = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int i) {
+                if (i == TextToSpeech.SUCCESS) {
+                    int result = Speaker.setLanguage(Locale.ENGLISH);
+                    if (result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED) {
+                        Snackbar.make(RootTryYourself, "English language not supported by this device. Audio not available.", Snackbar.LENGTH_LONG).show();
+                    }
 
+                } else
+                {
+                    Snackbar.make(RootTryYourself, "Text-to-Speech initialization failed.", Snackbar.LENGTH_LONG).show();
+                }
+            }
+        });
 
     }
 
@@ -97,13 +118,15 @@ public class TryUrSelfActivity extends AppCompatActivity {
 
                 } else if (event.getAction() == MotionEvent.ACTION_MOVE) {
                     finishButton.setText("CONTINUE DRAWING " + texts.get(circleCount) + " CIRCLE " +
-                            "-"+circleDrawLayout.getXX()+","+circleDrawLayout.getYY());
+                            "-" + circleDrawLayout.getXX() + "," + circleDrawLayout.getYY());
                     finishButton.setBackgroundColor(Color.parseColor("#008577"));
                     pixelXs.add(circleDrawLayout.getXX());
                     pixelYs.add(circleDrawLayout.getYY());
 
                 } else if (event.getAction() == MotionEvent.ACTION_UP) {
-                    finishButton.setText("CLICK HERE IF " + texts.get(circleCount) + " IS FINISHED");
+                    String Text = "CLICK HERE IF " + texts.get(circleCount) + " CIRCLE IS FINISHED";
+                    Speaker.speak(Text,TextToSpeech.QUEUE_FLUSH,null);
+                    finishButton.setText(Text);
                     finishButton.setBackgroundColor(Color.parseColor("#00e676"));
                     base = chronometer.getBase();
                     chronometer.setBase(base);
@@ -145,14 +168,14 @@ public class TryUrSelfActivity extends AppCompatActivity {
                         circleCount++;
                         break;
                     case 4:
-                            float total=  scores.get(0).intValue()  +
-                                    scores.get(1).intValue() +
-                                    scores.get(2).intValue()
-                                    + scores.get(3).intValue();
-                            float average=total/4;
-                        Intent intent=new Intent(TryUrSelfActivity.this,ScoreActivity.class);
-                        intent.putExtra("VALUE",(int)average);
-                        intent.putExtra("TOTAL",100);
+                        float total = scores.get(0).intValue() +
+                                scores.get(1).intValue() +
+                                scores.get(2).intValue()
+                                + scores.get(3).intValue();
+                        float average = total / 4;
+                        Intent intent = new Intent(TryUrSelfActivity.this, ScoreActivity.class);
+                        intent.putExtra("VALUE", (int) average);
+                        intent.putExtra("TOTAL", 100);
                         startActivity(intent);
                         break;
 
@@ -347,6 +370,14 @@ public class TryUrSelfActivity extends AppCompatActivity {
         }
     }
 
-
+    @Override
+    protected void onDestroy() {
+        if(Speaker != null)
+        {
+            Speaker.stop();
+            Speaker.shutdown();
+        }
+        super.onDestroy();
+    }
 }
 
