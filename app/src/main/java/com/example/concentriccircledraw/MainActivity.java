@@ -11,13 +11,14 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Chronometer;
+import android.widget.ImageButton;
 
 import com.crowdfire.cfalertdialog.CFAlertDialog;
 
 public class MainActivity extends AppCompatActivity {
     private Button finishButton;
     private PaintView paintView;
-    private Button refreshButton;
+    private ImageButton refreshButton;
     private Chronometer chronometer;
     private long base;
     private boolean start = true;
@@ -37,9 +38,29 @@ public class MainActivity extends AppCompatActivity {
         }
         finishButton = (Button) findViewById(R.id.finishButton);
         paintView = (PaintView) findViewById(R.id.paintView);
-        refreshButton = (Button) findViewById(R.id.refreshButton);
+        refreshButton = (ImageButton) findViewById(R.id.refreshButton);
         chronometer = (Chronometer) findViewById(R.id.chronometer);
         TryYourselfBtn = findViewById(R.id.main_try_yourself_btn);
+
+        CFAlertDialog.Builder builder = new CFAlertDialog.Builder(this)
+                .setDialogStyle(CFAlertDialog.CFAlertStyle.BOTTOM_SHEET)
+                .setTitle("Instructions.")
+                .setMessage("1.Trace the concentric circles one by one.\n" +
+                            "2.Complete the concentric circles one by one with minimum time and less traced out \n" +
+                            "3.At last click above button to get score.")
+                .setIcon(R.drawable.ic_info_black_24dp)
+                .addButton("Ok, I understand", -1, -1, CFAlertDialog.CFAlertActionStyle.POSITIVE,
+                        CFAlertDialog.CFAlertActionAlignment.END, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                            }
+                        });
+
+        builder.show();
+
+
+
 
         finishButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -114,13 +135,13 @@ public class MainActivity extends AppCompatActivity {
                         {
                             ErrorMediaPlayer.pause();
                         }
-                        finishButton.setBackgroundColor(Color.parseColor("#008577"));
+                        finishButton.setBackgroundColor(Color.parseColor("#00574B"));
                         finishButton.setText("CONTINUE");
                     }
                 } else if (event.getAction() == MotionEvent.ACTION_UP) {
                     ErrorMediaPlayer.pause();
                     finishButton.setText("CLICK HERE IF FINISHED");
-                    finishButton.setBackgroundColor(Color.parseColor("#00e676"));
+                    finishButton.setBackgroundColor(Color.parseColor("#008577"));
                     base = chronometer.getBase();
                     chronometer.setBase(base);
                     chronometer.stop();
@@ -131,7 +152,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
+       findViewById(R.id.homeButton).setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View view) {
+               finishAffinity();
+               System.exit(0);
+           }
+       });
     }
 
     private void showfinalDialogue(int marks, final PaintView paintView) {

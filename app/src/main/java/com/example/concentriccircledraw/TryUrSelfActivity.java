@@ -102,6 +102,32 @@ public class TryUrSelfActivity extends AppCompatActivity {
             }
         });
 
+        CFAlertDialog.Builder builder = new CFAlertDialog.Builder(this)
+                .setDialogStyle(CFAlertDialog.CFAlertStyle.BOTTOM_SHEET)
+                .setTitle("Instructions.")
+                .setMessage("1.Draw 4 circles within the given radius\n" +
+                        "2.After each circle click the above button \n" +
+                        "3.At last click the above button to get score.")
+                .setIcon(R.drawable.ic_info_black_24dp)
+                .addButton("Ok, I understand", -1, -1, CFAlertDialog.CFAlertActionStyle.POSITIVE,
+                        CFAlertDialog.CFAlertActionAlignment.END, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                               dialog.dismiss();
+                            }
+                        });
+
+        builder.show();
+
+          findViewById(R.id.homeButton).setOnClickListener(new View.OnClickListener() {
+              @Override
+              public void onClick(View view) {
+                  finishAffinity();
+                  System.exit(0);
+              }
+          });
+
+
     }
 
     @Override

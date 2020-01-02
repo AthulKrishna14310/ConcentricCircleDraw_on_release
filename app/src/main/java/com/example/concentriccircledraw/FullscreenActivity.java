@@ -9,6 +9,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Toast;
 
 import com.crowdfire.cfalertdialog.CFAlertDialog;
 
@@ -116,6 +117,15 @@ public class FullscreenActivity extends AppCompatActivity {
                 showIntroDialogue();
             }
         });
+
+        String uid=getIntent().getStringExtra("UID");
+        if(uid!=null)
+            Toast.makeText(getApplicationContext(),uid,Toast.LENGTH_SHORT).show();
+        else{
+            Toast.makeText(getApplicationContext(),"Opened Separately",Toast.LENGTH_SHORT).show();
+        }
+
+
     }
 
 
@@ -138,24 +148,7 @@ public class FullscreenActivity extends AppCompatActivity {
         }
     }
     private void showIntroDialogue() {
-        CFAlertDialog.Builder builder = new CFAlertDialog.Builder(this)
-                .setDialogStyle(CFAlertDialog.CFAlertStyle.BOTTOM_SHEET)
-                .setTitle("Instructions.")
-                .setMessage("1.Trace the concentric circles and click above button.\n" +
-                            "2.Draw the concentric circles one by one by clicking the above " +
-                        "button\n" +
-                            "3.At last click above button to get score.")
-                .setIcon(R.drawable.ic_info_black_24dp)
-                .addButton("Ok, I understand", -1, -1, CFAlertDialog.CFAlertActionStyle.POSITIVE,
-                        CFAlertDialog.CFAlertActionAlignment.END, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                startActivity(new Intent(FullscreenActivity.this,MainActivity.class));
-                            }
-                        });
-
-        builder.show();
-
+        startActivity(new Intent(FullscreenActivity.this,MainActivity.class));
 
     }
 

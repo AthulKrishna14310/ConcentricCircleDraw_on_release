@@ -25,27 +25,38 @@
         android:background="@color/colorPrimaryDark"
         android:text="START TRACING TRHOUGH THE CIRCLES"
         android:textColor="#FFFF"
-        android:textSize="40sp" />
+        android:textSize="30sp" />
 
     <android.support.v7.widget.CardView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        app:cardElevation="6dp"
+        android:layout_alignParentLeft="true"
         app:cardCornerRadius="30dp"
-        app:cardElevation="10dp"
-        android:layout_alignParentRight="true"
-        android:layout_margin="8dp"
-        >
+        android:layout_margin="10dp">
 
-        <Button
-            android:id="@+id/refreshButton"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+        <ImageButton
+            android:id="@+id/homeButton"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:background="@color/colorLightBlue"
-            android:foreground="@drawable/ic_refresh_black_24dp" />
+            android:src="@drawable/ic_home_black_24dp" />
+    </android.support.v7.widget.CardView>
+    <android.support.v7.widget.CardView
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        app:cardElevation="6dp"
+        android:layout_alignParentRight="true"
+        app:cardCornerRadius="30dp"
+        android:layout_margin="10dp">
 
-     </android.support.v7.widget.CardView>
-
+        <ImageButton
+            android:id="@+id/refreshButton"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:background="@color/colorLightBlue"
+            android:src="@drawable/ic_refresh_black_24dp" />
+    </android.support.v7.widget.CardView>
     <Chronometer
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
