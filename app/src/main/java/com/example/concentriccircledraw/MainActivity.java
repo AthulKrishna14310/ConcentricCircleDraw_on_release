@@ -24,6 +24,8 @@ public class MainActivity extends AppCompatActivity {
     private boolean start = true;
     private MediaPlayer ErrorMediaPlayer;
     private Button TryYourselfBtn;
+    private String uid;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                startActivity(new Intent(MainActivity.this, TryUrSelfActivity.class));
+                startActivity(new Intent(MainActivity.this, TryUrSelfActivity.class).putExtra("UID",uid));
 
 
             }
@@ -159,6 +161,9 @@ public class MainActivity extends AppCompatActivity {
                System.exit(0);
            }
        });
+
+       uid=getIntent().getStringExtra("UID");
+
     }
 
     private void showfinalDialogue(int marks, final PaintView paintView) {
@@ -177,7 +182,7 @@ public class MainActivity extends AppCompatActivity {
                             CFAlertDialog.CFAlertActionAlignment.END, new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
-                                    startActivity(new Intent(MainActivity.this, TryUrSelfActivity.class));
+                                    startActivity(new Intent(MainActivity.this, TryUrSelfActivity.class).putExtra("UID",uid));
                                 }
                             });
 

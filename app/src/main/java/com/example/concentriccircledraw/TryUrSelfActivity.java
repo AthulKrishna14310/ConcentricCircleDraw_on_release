@@ -55,8 +55,9 @@ public class TryUrSelfActivity extends AppCompatActivity {
     private ArrayList<Integer> scores;
     private int temp = 0;
 
-    private TextToSpeech Speaker;
+    private TextToSpeech Speaker ;
     private RelativeLayout RootTryYourself;
+    private String uid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -127,7 +128,7 @@ public class TryUrSelfActivity extends AppCompatActivity {
               }
           });
 
-
+         uid=getIntent().getStringExtra("UID");
     }
 
     @Override
@@ -214,6 +215,8 @@ public class TryUrSelfActivity extends AppCompatActivity {
                         Intent intent = new Intent(TryUrSelfActivity.this, ScoreActivity.class);
                         intent.putExtra("VALUE", (int) average);
                         intent.putExtra("TOTAL", 100);
+                        intent.putExtra("TIME",String.valueOf(SystemClock.elapsedRealtime() - chronometer.getBase()));
+                        intent.putExtra("UID",uid);
                         startActivity(intent);
                         break;
 

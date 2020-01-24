@@ -87,6 +87,7 @@ public class FullscreenActivity extends AppCompatActivity {
             return false;
         }
     };
+    private String uid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -118,7 +119,7 @@ public class FullscreenActivity extends AppCompatActivity {
             }
         });
 
-        String uid=getIntent().getStringExtra("UID");
+        uid=getIntent().getStringExtra("UID");
         if(uid!=null)
             Toast.makeText(getApplicationContext(),uid,Toast.LENGTH_SHORT).show();
         else{
@@ -148,7 +149,8 @@ public class FullscreenActivity extends AppCompatActivity {
         }
     }
     private void showIntroDialogue() {
-        startActivity(new Intent(FullscreenActivity.this,MainActivity.class));
+        startActivity(new Intent(FullscreenActivity.this,MainActivity.class)
+                .putExtra("UID",uid));
 
     }
 
