@@ -13,61 +13,103 @@
         android:id="@+id/circleDrawLayout"
         android:layout_width="600dp"
         android:layout_height="600dp"
-        android:layout_alignParentBottom="true"
         android:layout_centerInParent="false"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="30dp" />
-
-    <Button
-        android:id="@+id/finishButtontry"
-        android:layout_width="match_parent"
+    <com.google.android.material.textview.MaterialTextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:background="@color/colorPrimaryDark"
-        android:text="DRAW THE FIRST CIRCLE ,THEN CLICK HERE"
-        android:textColor="#FFFF"
-        android:textSize="30sp" />
+        android:text="Start Tracing.."
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        style="@style/TextAppearance.MaterialComponents.Headline6"
+        android:layout_margin="16dp"
+        android:id="@+id/resultText"
+        />
 
-    <android.support.v7.widget.CardView
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        app:cardElevation="6dp"
+
+    <com.google.android.material.button.MaterialButton
+
+        android:id="@+id/homeButton"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        app:cardCornerRadius="30dp"
-        android:layout_margin="10dp">
-
-        <ImageButton
-            android:id="@+id/homeButton"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:background="@color/colorLightBlue"
-            android:src="@drawable/ic_home_black_24dp" />
-    </android.support.v7.widget.CardView>
-    <android.support.v7.widget.CardView
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        app:cardElevation="6dp"
-        android:layout_alignParentRight="true"
-        app:cardCornerRadius="30dp"
-        android:layout_margin="10dp">
-
-        <ImageButton
-            android:id="@+id/refreshButton"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:background="@color/colorLightBlue"
-            android:src="@drawable/ic_refresh_black_24dp" />
-    </android.support.v7.widget.CardView>
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:drawableTop="@drawable/ic_home_black_24dp"
+        android:drawableTint="@color/colorPrimary"
+        android:padding="16dp"
+        android:text="  Home  "
+        />
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/refreshButton"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:drawableTint="@color/colorPrimary"
+        android:layout_marginBottom="16dp"
+        android:layout_toRightOf="@id/homeButton"
+        android:drawableTop="@drawable/ic_refresh_black_24dp"
+        android:padding="16dp"
+        android:text="Refresh"
+        />
     <Chronometer
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/colorAccent"
-        android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
-        android:textSize="50sp"
-        android:textStyle="bold"
+        android:layout_margin="16dp"
         android:id="@+id/chronometer"
-        android:layout_marginRight="10dp"/>
-
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@id/refreshButton"
+        style="@style/TextAppearance.MaterialComponents.Headline6"
+        android:textColor="@color/colorPrimary"/>
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/backButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:drawableTop="@drawable/ic_baseline_arrow_back_24"
+        android:text="Back"
+        android:layout_toLeftOf="@+id/skipButton"
+        android:padding="16dp"
+        android:drawableTint="@color/colorPrimary"
+        android:layout_margin="16dp"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        />
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/submitButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:drawableTop="@drawable/ic_baseline_check_24"
+        android:drawableTint="#fafafa"
+        android:text="Submit"
+        android:padding="16dp"
+        android:layout_margin="16dp"
+        style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
+        />
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/skipButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:drawableTop="@drawable/ic_baseline_arrow_forward_24"
+        android:text="Skip"
+        android:layout_toLeftOf="@+id/submitButton"
+        android:padding="16dp"
+        android:drawableTint="@color/colorPrimary"
+        android:layout_margin="16dp"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        />
 
 </RelativeLayout>

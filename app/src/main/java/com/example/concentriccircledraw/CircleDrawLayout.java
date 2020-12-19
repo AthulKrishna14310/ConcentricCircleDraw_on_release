@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 
 import java.util.ArrayList;
 
-public class CircleDrawLayout extends android.support.v7.widget.AppCompatImageView {
+public class CircleDrawLayout extends androidx.appcompat.widget.AppCompatImageView {
 
     public ViewGroup.LayoutParams params;
     private Path path=new Path();
@@ -24,6 +24,10 @@ public class CircleDrawLayout extends android.support.v7.widget.AppCompatImageVi
     private boolean outIndex=false;
     private ArrayList<Integer> pixelX=new ArrayList<>();
     private ArrayList<Integer> pixelY=new ArrayList<>();
+
+    public ArrayList<Float> totalPixelX=new ArrayList<>();
+    public ArrayList<Float> totalPixelY=new ArrayList<>();
+
     private int X,Y;
     private ArrayList<Integer> taps=new ArrayList<>();
     public ArrayList<Integer> getPixelX() {
@@ -44,14 +48,27 @@ public class CircleDrawLayout extends android.support.v7.widget.AppCompatImageVi
 
     private int totalCoordinates=0;
 
+    public Path getPath() {
+        return path;
+    }
 
+    public void setPath(Path path) {
+        this.path = path;
+    }
 
+    public Paint getBrush() {
+        return brush;
+    }
+
+    public void setBrush(Paint brush) {
+        this.brush = brush;
+    }
 
     public CircleDrawLayout(Context context) {
         super(context);
 
         brush.setAntiAlias(true);
-        brush.setColor(Color.MAGENTA);
+        brush.setColor(Color.GREEN);
         brush.setStyle(Paint.Style.STROKE);
         brush.setStrokeJoin(Paint.Join.ROUND);
         brush.setStrokeWidth(15f);
@@ -68,7 +85,7 @@ public class CircleDrawLayout extends android.support.v7.widget.AppCompatImageVi
     public CircleDrawLayout(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         brush.setAntiAlias(true);
-        brush.setColor(Color.MAGENTA);
+        brush.setColor(Color.GREEN);
         brush.setStyle(Paint.Style.STROKE);
         brush.setStrokeJoin(Paint.Join.ROUND);
         brush.setStrokeWidth(15f);
@@ -82,7 +99,7 @@ public class CircleDrawLayout extends android.support.v7.widget.AppCompatImageVi
     public CircleDrawLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
         brush.setAntiAlias(true);
-        brush.setColor(Color.MAGENTA);
+        brush.setColor(Color.GREEN);
         brush.setStyle(Paint.Style.STROKE);
         brush.setStrokeJoin(Paint.Join.ROUND);
         brush.setStrokeWidth(15f);
@@ -105,6 +122,9 @@ public class CircleDrawLayout extends android.support.v7.widget.AppCompatImageVi
     public boolean onTouchEvent(MotionEvent event) {
         float pointX=event.getX();
         float pointY=event.getY();
+
+        totalPixelX.add(pointX);
+        totalPixelY.add(pointY);
 
         switch (event.getAction()){
             case MotionEvent.ACTION_DOWN:
@@ -167,6 +187,17 @@ public class CircleDrawLayout extends android.support.v7.widget.AppCompatImageVi
     protected void onDraw(Canvas canvas) {
           canvas.drawPath(path,brush);
          }
+
+    public void clear(){
+        path=new Path();
+        brush=new Paint();
+        brush.setAntiAlias(true);
+        brush.setColor(Color.GREEN);
+        brush.setStyle(Paint.Style.STROKE);
+        brush.setStrokeJoin(Paint.Join.ROUND);
+        brush.setStrokeWidth(15f);
+
+    }
 
     public int getTouched() {
         return touched;

@@ -1,13 +1,10 @@
 package com.example.concentriccircledraw;
 
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.os.SystemClock;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -19,7 +16,6 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.FirebaseDatabase;
 
 
-import java.io.FileReader;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -80,6 +76,7 @@ public class ScoreActivity extends AppCompatActivity {
                                         } else {
                                             // Change this when moving to another tab
                                         }
+                                        new UploadDialogue(ScoreActivity.this,getApplicationContext(),"Uploading data , please wait...");
                                         FirebaseDatabase.getInstance().getReference()
                                                 .child("Users")
                                                 .child(uid.replace(".","_"))

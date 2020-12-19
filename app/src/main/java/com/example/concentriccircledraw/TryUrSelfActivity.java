@@ -2,19 +2,24 @@ package com.example.concentriccircledraw;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
 import android.graphics.Color;
-import android.media.MediaPlayer;
+import android.graphics.Paint;
+import android.graphics.Path;
 import android.os.SystemClock;
 import android.speech.tts.TextToSpeech;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
+import com.google.android.material.snackbar.Snackbar;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.RelativeLayout;
-import android.widget.Space;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.crowdfire.cfalertdialog.CFAlertDialog;
 
@@ -58,13 +63,12 @@ public class TryUrSelfActivity extends AppCompatActivity {
     private TextToSpeech Speaker ;
     private RelativeLayout RootTryYourself;
     private String uid;
-
+    private TextView resultText;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_try_ur_self);
         getSupportActionBar().hide();
-
         radiuses1 = new ArrayList<>();
         radiuses2 = new ArrayList<>();
         radiuses3 = new ArrayList<>();
@@ -73,19 +77,17 @@ public class TryUrSelfActivity extends AppCompatActivity {
         scores = new ArrayList<>();
         pixelXs = new ArrayList<>();
         pixelYs = new ArrayList<>();
-
         texts.clear();
-        texts.add("FIRST");
-        texts.add("SECOND");
-        texts.add("THIRD");
-        texts.add("FOURTH");
-        texts.add("LAST");
-
+        texts.add("first");
+        texts.add("second");
+        texts.add("third");
+        texts.add("fourth");
+        texts.add("last");
 
         circleDrawLayout = (CircleDrawLayout) findViewById(R.id.circleDrawLayout);
-        finishButton = (Button) findViewById(R.id.finishButtontry);
+        finishButton = (Button) findViewById(R.id.submitButton);
         chronometer = (Chronometer) findViewById(R.id.chronometer);
-
+        resultText=findViewById(R.id.resultText);
         RootTryYourself = findViewById(R.id.root_try_yourself);
         Speaker = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
             @Override
@@ -103,33 +105,33 @@ public class TryUrSelfActivity extends AppCompatActivity {
             }
         });
 
-        CFAlertDialog.Builder builder = new CFAlertDialog.Builder(this)
-                .setDialogStyle(CFAlertDialog.CFAlertStyle.BOTTOM_SHEET)
-                .setTitle("Instructions.")
-                .setMessage("1.Draw 4 circles within the given radius\n" +
-                        "2.After each circle click the above button \n" +
-                        "3.At last click the above button to get score.")
-                .setIcon(R.drawable.ic_info_black_24dp)
-                .addButton("Ok, I understand", -1, -1, CFAlertDialog.CFAlertActionStyle.POSITIVE,
-                        CFAlertDialog.CFAlertActionAlignment.END, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                               dialog.dismiss();
-                            }
-                        });
-
-        builder.show();
-
-          findViewById(R.id.homeButton).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.homeButton).setOnClickListener(new View.OnClickListener() {
               @Override
               public void onClick(View view) {
                   finishAffinity();
-                  System.exit(0);
               }
           });
-
+        findViewById(R.id.backButton).setOnClickListener(new View.OnClickListener() {
+              @Override
+              public void onClick(View view) {
+                  finish();
+              }
+          });
+        findViewById(R.id.skipButton).setOnClickListener(new View.OnClickListener() {
+              @Override
+              public void onClick(View view) {
+                  Toast.makeText(getApplicationContext(), "You are at end", Toast.LENGTH_SHORT).show();
+              }
+        });
+        findViewById(R.id.backButton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
          uid=getIntent().getStringExtra("UID");
     }
+
 
     @Override
     protected void onStart() {
@@ -149,22 +151,18 @@ public class TryUrSelfActivity extends AppCompatActivity {
                         }
                     }
                      */
+                    resultText.setText("Continue tracing the  " + texts.get(circleCount) + " circle");
 
-                    finishButton.setText("CONTINUE DRAWING " + texts.get(circleCount) + " CIRCLE");
-                    finishButton.setBackgroundColor(Color.parseColor("#00574B"));
 
                 } else if (event.getAction() == MotionEvent.ACTION_MOVE) {
-                    finishButton.setText("CONTINUE DRAWING " + texts.get(circleCount) + " CIRCLE " +
-                            "-" + circleDrawLayout.getXX() + "," + circleDrawLayout.getYY());
-                    finishButton.setBackgroundColor(Color.parseColor("#008577"));
+                    resultText.setText("Continue drawing " + texts.get(circleCount) + " circle.");
                     pixelXs.add(circleDrawLayout.getXX());
                     pixelYs.add(circleDrawLayout.getYY());
 
                 } else if (event.getAction() == MotionEvent.ACTION_UP) {
-                    String Text = "CLICK HERE IF " + texts.get(circleCount) + " CIRCLE IS FINISHED";
+                    String Text = "Click SUBMIT if " + texts.get(circleCount) + " circle is finished.";
                     Speaker.speak(Text,TextToSpeech.QUEUE_FLUSH,null);
-                    finishButton.setText(Text);
-                    finishButton.setBackgroundColor(Color.parseColor("#00e676"));
+                    resultText.setText(Text);
                     base = chronometer.getBase();
                     chronometer.setBase(base);
                     chronometer.stop();
@@ -181,28 +179,26 @@ public class TryUrSelfActivity extends AppCompatActivity {
             public void onClick(View v) {
                 switch (circleCount) {
                     case 0:
-                        finishButton.setText("NOW DRAW THE " + texts.get(circleCount + 1) + " CIRCLE");
-                        finishButton.setBackgroundColor(Color.parseColor("#00574B"));
+                        resultText.setText("Now draw the  " + texts.get(circleCount + 1) + " circle");
+                       // finishButton.setBackgroundColor(Color.parseColor("#00574B"));
                         revealSCORE_ONE();
                         circleCount++;
                         break;
                     case 1:
-                        finishButton.setText("NOW DRAW THE " + texts.get(circleCount + 1) + " CIRCLE");
-                        finishButton.setBackgroundColor(Color.parseColor("#00574B"));
+                        resultText.setText("Now draw the  " + texts.get(circleCount + 1) + " circle");
                         revealSCORE_TWO();
                         circleCount++;
                         break;
                     case 2:
-                        finishButton.setText("NOW DRAW THE " + texts.get(circleCount + 1) + " CIRCLE");
-                        finishButton.setBackgroundColor(Color.parseColor("#00574B"));
+                        resultText.setText("Now draw the  " + texts.get(circleCount + 1) + " circle");
                         revealSCORE_THREE();
                         circleCount++;
                         break;
                     case 3:
-                        String text = "CLICK AGAIN TO GET THE SCORE";
+                        String text = "Click again to get the score.";
                         Speaker.speak(text,TextToSpeech.QUEUE_FLUSH,null);
-                        finishButton.setText(text);
-                        finishButton.setBackgroundColor(Color.parseColor("#00574B"));
+                        resultText.setText(text);
+                       // finishButton.setBackgroundColor(Color.parseColor("#00574B"));
                         revealSCORE_FOUR();
                         circleCount++;
                         break;
@@ -221,7 +217,8 @@ public class TryUrSelfActivity extends AppCompatActivity {
                         break;
 
                     default:
-                        finishButton.setText("FINISHED YOUR ACTIVITY");
+                       // finishButton.setText("FINISHED YOUR ACTIVITY");
+                        resultText.setText("Finished your activity.");
                 }
             }
         });
@@ -229,13 +226,29 @@ public class TryUrSelfActivity extends AppCompatActivity {
         findViewById(R.id.refreshButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                recreate();
+               refresh();
             }
         });
 
 
     }
-
+    private void refresh(){
+        circleDrawLayout.clear();
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inMutable = true;
+        Bitmap mBackground = BitmapFactory.decodeResource(getResources(), R.drawable.circle, options);
+        Paint b = circleDrawLayout.getBrush();
+        Path p = circleDrawLayout.getPath();
+        Canvas canvas = new Canvas(mBackground);
+        b.setColor(Color.WHITE);
+        for (int i = 0; i < circleDrawLayout.totalPixelX.size(); i++) {
+            p.moveTo(circleDrawLayout.totalPixelX.get(i), circleDrawLayout.totalPixelY.get(i));
+            canvas.drawPath(p, b);
+        }
+        circleDrawLayout.setImageBitmap(mBackground);
+        circleDrawLayout.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.circle));
+        circleDrawLayout.clear();
+    }
     private void revealSCORE_TWO() {
         try {
             temp = 0;

@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 
 import java.util.ArrayList;
 
-public class PaintView extends android.support.v7.widget.AppCompatImageView {
+public class PaintView extends androidx.appcompat.widget.AppCompatImageView {
 
     public ViewGroup.LayoutParams params;
     private Path path=new Path();
@@ -22,21 +22,19 @@ public class PaintView extends android.support.v7.widget.AppCompatImageView {
     private Bitmap bitmap;
     private int touched=0;
     private int total=0;
-
     public boolean blueStarted=false;
     public boolean greenStarted=false;
     public boolean yellowStarted=false;
     public boolean magentaStarted=false;
-
     public boolean blueEnded=false;
     public boolean greenEnded=false;
     public boolean yellowEnded=false;
     public boolean magentaEnded=false;
-
     private boolean outIndex=false;
     private ArrayList<Integer> pixels=new ArrayList<>();
     private int totalCoordinates=0;
-
+    public ArrayList<Float> totalPixelX=new ArrayList<>();
+    public ArrayList<Float> totalPixelY=new ArrayList<>();
     public ArrayList<Integer> getPixels() {
         return pixels;
     }
@@ -57,11 +55,10 @@ public class PaintView extends android.support.v7.widget.AppCompatImageView {
         super(context);
 
         brush.setAntiAlias(true);
-        brush.setColor(Color.MAGENTA);
+        brush.setColor(Color.GREEN);
         brush.setStyle(Paint.Style.STROKE);
         brush.setStrokeJoin(Paint.Join.ROUND);
-        brush.setStrokeWidth(12f);
-
+        brush.setStrokeWidth(15f);
         this.setDrawingCacheEnabled(true);
         this.buildDrawingCache(true);
         params=new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
@@ -74,11 +71,10 @@ public class PaintView extends android.support.v7.widget.AppCompatImageView {
     public PaintView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         brush.setAntiAlias(true);
-        brush.setColor(Color.MAGENTA);
+        brush.setColor(Color.GREEN);
         brush.setStyle(Paint.Style.STROKE);
         brush.setStrokeJoin(Paint.Join.ROUND);
-        brush.setStrokeWidth(12f);
-
+        brush.setStrokeWidth(15f);
         this.setBackground(context.getDrawable(R.drawable.circle));
         this.setDrawingCacheEnabled(true);
         this.buildDrawingCache(true);
@@ -88,11 +84,10 @@ public class PaintView extends android.support.v7.widget.AppCompatImageView {
     public PaintView(Context context, AttributeSet attrs) {
         super(context, attrs);
         brush.setAntiAlias(true);
-        brush.setColor(Color.MAGENTA);
+        brush.setColor(Color.GREEN);
         brush.setStyle(Paint.Style.STROKE);
         brush.setStrokeJoin(Paint.Join.ROUND);
-        brush.setStrokeWidth(12f);
-
+        brush.setStrokeWidth(15f);
         this.setBackground(context.getDrawable(R.drawable.circle));
         this.setDrawingCacheEnabled(true);
         this.buildDrawingCache(true);
@@ -169,6 +164,32 @@ public class PaintView extends android.support.v7.widget.AppCompatImageView {
         }
         postInvalidate();
         return false;
+    }
+    public void clear(){
+        path=new Path();
+        brush=new Paint();
+        brush.setAntiAlias(true);
+        brush.setColor(Color.GREEN);
+        brush.setStyle(Paint.Style.STROKE);
+        brush.setStrokeJoin(Paint.Join.ROUND);
+        brush.setStrokeWidth(15f);
+
+    }
+
+    public Path getPath() {
+        return path;
+    }
+
+    public void setPath(Path path) {
+        this.path = path;
+    }
+
+    public Paint getBrush() {
+        return brush;
+    }
+
+    public void setBrush(Paint brush) {
+        this.brush = brush;
     }
 
     public boolean isOutIndex() {
